@@ -1,0 +1,26 @@
+---
+    - name: Install If-Up-Down
+      become: true
+      ansible.builtin.apt:
+         name: ifupdown
+         state: present
+
+    - name: Enable Network
+      become: true
+      ansible.builtin.file:
+        path: "/etc/network/interfaces.d"
+        owner: root
+        group: root
+        mode: 644
+        state: directory
+
+    - name: Enable Network
+      become: true
+      template:
+        src: network.j2
+        dest: "/etc/network/interfaces.d/00-eth.conf"
+        owner: root
+        group: root
+        mode: 444
+      notify:
+          - Restart Network

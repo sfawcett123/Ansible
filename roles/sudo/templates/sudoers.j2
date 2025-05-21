@@ -1,0 +1,5 @@
+{% for service in services %}
+  {% for action in actions %}
+     %sudo ALL=NOPASSWD: /usr/bin/systemctl {{action}}  {{service}}.service
+  {% endfor %}
+{% endfor %}

@@ -1,0 +1,18 @@
+# Ansible Managed
+
+default-lease-time {{default_lease_time}};
+max-lease-time {{max_lease_time}};
+
+authoritative;
+
+log-facility local7;
+
+subnet {{subnet.ip}} netmask {{subnet.mask}} {
+   range {{subnet.range.from}} {{subnet.range.to}};
+   authoritative;
+
+ {% for key, value in subnet.options.items() %}
+   option {{key}} {{value}};
+ {% endfor %}
+
+}

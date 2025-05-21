@@ -1,0 +1,13 @@
+---
+
+    - name: Set the hostname
+      become: true
+      ansible.builtin.hostname:
+        name: "{{ hostname }}"
+
+    - name: install Packages
+      become: true
+      ansible.builtin.apt:
+        pkg:
+          - pip
+          - virtualenv

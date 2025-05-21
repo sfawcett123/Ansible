@@ -1,0 +1,7 @@
+---
+
+  - name: Restart fsm
+    become: true
+    ansible.builtin.service:
+       name: "{{fsm.service.name}}"
+       state: restarted

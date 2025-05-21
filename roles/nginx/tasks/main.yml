@@ -1,0 +1,28 @@
+---
+    - name: install Packages
+      become: true
+      ansible.builtin.apt:
+        pkg:
+          - nginx
+
+    - name: Configure NGINX
+      become: true
+      template:
+        src: nginx.j2
+        dest: "/etc/nginx/sites-available/fsm"
+        mode: 644
+      notify:
+          - Restart nginx
+
+    - name: Create a symbolic link
+      become: true
+      ansible.builtin.file:
+        src: "/etc/nginx/sites-available/fsm"
+        dest: "/etc/nginx/sites-enabled/fsm"
+        state: link
+
+    - name: Start Nginx
+      service:
+        name: nginx.service
+        state: started
+        enabled: yes

@@ -1,0 +1,21 @@
+---
+
+fsm:
+  simulator:
+    server: Game
+    mac: "D8:BB:C1:9E:C8:0C"
+    wakeup: True
+  description: Flight Simulator Manager
+  config: /etc/fsm
+  home:   /opt/fsm
+  venv:   venv
+  user:
+     group:  www-data
+     name:   fsm
+     shell:  /bin/bash
+  default_user_password: "blah"
+  package:
+    name: fsm
+    extra_args: -i https://__token__:{{gitlab_token}}@gitlab.com/api/v4/projects/62537046/packages/pypi/simple
+  service:
+    name: fsm

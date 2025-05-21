@@ -1,0 +1,10 @@
+services:
+   - fsm
+   - nginx
+   - network
+
+actions:
+  - stop
+  - start
+  - restart
+  - status

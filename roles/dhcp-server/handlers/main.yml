@@ -1,0 +1,9 @@
+---
+- name: restart dhcpd
+  service: name={{ dhcp_service }} state=restarted
+
+- name: restart dhcpd6
+  service: name={{ dhcp6_service }} state=restarted
+
+- name: restart apparmor
+  service: name={{ apparmor_service }} state=restarted

@@ -1,0 +1,14 @@
+[Unit]
+Description={{fsm.description}}
+After=network.target
+
+[Service]
+Restart=always
+RestartSec=30
+User=root
+Group={{fsm.user.group}}
+WorkingDirectory={{fsm.home}}
+ExecStart={{fsm.home}}/{{fsm.venv}}/bin/gunicorn --workers 3 --bind unix:fsm.sock -m 007 wsgi:app
+
+[Install]
+WantedBy=multi-user.target

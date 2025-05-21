@@ -1,0 +1,16 @@
+---
+    - name: Restart Network
+      become: true
+      ansible.builtin.service:
+        name: networking
+        state: restarted
+      when:
+        - ansible_distribution_major_version == 11
+
+    - name: Restart Network
+      become: true
+      ansible.builtin.service:
+        name: NetworkManager
+        state: restarted
+      when:
+        - ansible_distribution_major_version == 12
