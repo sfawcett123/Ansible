@@ -1,6 +1,6 @@
-# Raspberry Pi
+# Compute
 
-## Machines
+## Raspberry PI
 
 |IP|Machine Name|Type|OS|
 |--|------------|-----|--|
