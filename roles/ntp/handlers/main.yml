@@ -1,6 +1,5 @@
 ---
-# file: roles/common/handlers/main.yml
-- name: restart ntpd
+- name: restart ntp
   service:
-    name: ntpd
+    name: chrony
     state: restarted
