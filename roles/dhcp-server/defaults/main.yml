@@ -5,7 +5,7 @@ kea_ctrl_agent_svc: 'kea-ctrl-agent.service'
 
 kea_svc_restart: true
 
-kea_dhcp4_enable: false
+kea_dhcp4_enable: true
 kea_ddns_enable: false
 kea_ctrl_agent_enable: false
 
