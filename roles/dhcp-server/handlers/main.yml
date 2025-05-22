@@ -8,7 +8,7 @@
 - name: 'Kea dhcp4 reload'
   ansible.builtin.service:
     name: '{{ kea_dhcp4_svc }}'
-    state: 'reloaded'
+    state: 'restarted'
   when: kea_svc_restart
 
 - name: 'Kea ddns restart'
