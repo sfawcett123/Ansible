@@ -36,5 +36,13 @@ manager:
 ## Test
 
 ```
-ansible all -i inventory.yaml  -m ping
+ansible all -m ping
 ```
+
+## Run
+
+```
+ansible-playbook manager.yml
+```
+
+

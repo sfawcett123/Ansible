@@ -19,8 +19,4 @@
 
   roles:
     - common
-    - network
-    - sudo
     - dhcp-server
-    - nginx
-    - manager
