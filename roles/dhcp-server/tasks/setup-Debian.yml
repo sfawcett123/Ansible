@@ -40,12 +40,6 @@
     enabled: "{{ kea_dhcp4_enable }}"
   tags: setup
 
-- name: Enable/disable DHCP6 service
-  ansible.builtin.service:
-    name: "{{ kea_dhcp6_svc }}"
-    enabled: "{{ kea_dhcp6_enable }}"
-  tags: setup
-
 - name: Enable/disable DDNS service
   ansible.builtin.service:
     name: "{{ kea_ddns_svc }}"
@@ -69,19 +63,6 @@
   when: kea_dhcp4_enable
   notify:
     - 'Kea dhcp4 reload'
-  tags: configuration
-
-- name: Install dhcp6 configuration
-  ansible.builtin.template:
-    src: "kea-dhcp6.conf.j2"
-    dest: "{{ kea_config_path }}/kea-dhcp6.conf"
-    validate: "kea-dhcp6 -t %s"
-    mode: "0640"
-    owner: "{{ kea_user }}"
-    group: "{{ kea_group }}"
-  when: kea_dhcp6_enable
-  notify:
-    - 'Kea dhcp6 reload'
   tags: configuration
 
 - name: Install ddns configuration
@@ -115,12 +96,6 @@
     name: "{{ kea_dhcp4_svc }}"
     state: started
   when: kea_dhcp4_enable
-
-- name: Make sure kea dhcp6 is running (if first setup)
-  ansible.builtin.service:
-    name: "{{ kea_dhcp6_svc }}"
-    state: started
-  when: kea_dhcp6_enable
 
 - name: Make sure kea ddns is running (if first setup)
   ansible.builtin.service:

@@ -67,40 +67,6 @@ kea_dhcp4_config:
 
     subnet4: []
 
-kea_dhcp6_config:
-  Dhcp6:
-    dhcp-ddns:
-      enable-updates: true
-      qualifying-suffix: "home.arpa."
-
-    interfaces-config:
-      interfaces: []
-
-    lease-database:
-      name: "/var/db/kea/dhcp6.leases"
-      persist: true
-      type: "memfile"
-
-    loggers:
-      - name: "kea-dhcp6"
-        severity: "DEBUG"
-        output_options:
-          - output: "/var/log/kea-dhcp6.log"
-            maxsize: 1048576
-            maxver: 8
-      - name: "kea-dhcp6.ddns"
-        severity: "DEBUG"
-        output_options:
-          - output: "/var/log/kea-dhcp6.ddns.log"
-            maxsize: 1048576
-            maxver: 8
-
-    rebind-timer: 2000
-    renew-timer: 1000
-    valid-lifetime: 4000
-
-    subnet6: []
-
 kea_ddns_config:
   DhcpDdns:
     dns-server-timeout: 100
