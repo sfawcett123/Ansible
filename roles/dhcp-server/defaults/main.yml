@@ -1,13 +1,11 @@
 ---
 kea_dhcp4_svc: 'kea-dhcp4-server.service'
-kea_dhcp6_svc: 'kea-dhcp6-server.service'
 kea_ddns_svc: 'kea-dhcp-ddns-server.service'
 kea_ctrl_agent_svc: 'kea-ctrl-agent.service'
 
 kea_svc_restart: true
 
 kea_dhcp4_enable: false
-kea_dhcp6_enable: false
 kea_ddns_enable: false
 kea_ctrl_agent_enable: false
 
@@ -21,7 +19,6 @@ kea_packages:
   - kea-ctrl-agent
   - kea-dhcp-ddns-server
   - kea-dhcp4-server
-  - kea-dhcp6-server
   - kea-doc
 
 kea_apt_repository: "deb https://dl.cloudsmith.io/public/isc/kea-2-2/deb/debian bookworm main"
@@ -117,11 +114,6 @@ kea_ctrl_agent_config:
         comment: "main server"
         socket-type: "unix"
         socket-name: "/path/to/the/unix/socket-v4"
-      dhcp6:
-        socket-type: "unix"
-        socket-name: "/path/to/the/unix/socket-v6"
-        user-context:
-          version: 3
       d2:
         socket-type: "unix"
         socket-name: "/path/to/the/unix/socket-d2"
