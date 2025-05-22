@@ -17,12 +17,12 @@ kea_user: "_kea"
 kea_group: "_kea"
 
 kea_packages:
-  - isc-kea-admin
-  - isc-kea-ctrl-agent
-  - isc-kea-dhcp-ddns-server
-  - isc-kea-dhcp4-server
-  - isc-kea-dhcp6-server
-  - isc-kea-doc
+  - kea-admin
+  - kea-ctrl-agent
+  - kea-dhcp-ddns-server
+  - kea-dhcp4-server
+  - kea-dhcp6-server
+  - kea-doc
 
 # https://kb.isc.org/docs/isc-kea-packages#using-the-cloudsmith-repositories
 kea_apt_repository: "deb https://dl.cloudsmith.io/public/isc/kea-2-2/deb/debian bookworm main"
