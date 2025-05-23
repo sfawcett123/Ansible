@@ -6,10 +6,11 @@ configure_apparmor: true
 
 domain: "flightsim.lan"
 
+proxy:
+  port: 3128
+
 subnet:
   cidr: 192.168.10.0/24
-  ip: 192.168.10.0
-  mask: 255.255.255.0
   range:
     from: 192.168.10.100
     to: 192.168.10.200

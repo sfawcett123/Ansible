@@ -1,2 +1,3 @@
 acl localnet src {{subnet.cidr}}
+http_port {{manager.ip}}:{{proxy.port}}
 http_access allow localnet
