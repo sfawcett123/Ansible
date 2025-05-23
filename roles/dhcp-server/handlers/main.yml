@@ -20,7 +20,7 @@
 - name: 'Kea ddns reload'
   ansible.builtin.service:
     name: '{{ kea_ddns_svc }}'
-    state: 'reloaded'
+    state: 'restarted'
   when: kea_svc_restart
 
 - name: 'Kea ctrl agent restart'
@@ -32,19 +32,5 @@
 - name: 'Kea ctrl agent reload'
   ansible.builtin.service:
     name: '{{ kea_ctrl_agent_svc }}'
-    state: 'reloaded'
-  when: kea_svc_restart
-
-# FreeBSD uses one service, which just wraps keactrl which in turn reads
-# /usr/local/etc/keactrl.conf
-- name: 'Kea reload'
-  ansible.builtin.service:
-    name: 'kea'
-    state: 'reloaded'
-  when: kea_svc_restart
-
-- name: 'Kea restart'
-  ansible.builtin.service:
-    name: 'kea'
     state: 'restarted'
   when: kea_svc_restart
