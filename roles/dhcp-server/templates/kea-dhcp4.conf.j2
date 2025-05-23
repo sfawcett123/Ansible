@@ -11,6 +11,11 @@
         "type": "memfile",
         "lfc-interval": 3600
     },
+    "dhcp-ddns": {
+        "enable-updates": true
+    },
+    "ddns-qualifying-suffix": "flightsim.lan",
+    "ddns-override-client-update": true,
     "valid-lifetime": 600,
     "max-valid-lifetime": 7200,
     "subnet4": [
@@ -24,19 +29,16 @@
         ],
         "option-data": [
           {
-            "name": "routers",
-            "data": "192.168.10.254"
-          },
-          {
             "name": "domain-name-servers",
-            "data": "192.168.10.1, 192.168.10.2"
+            "data": "192.168.10.1"
           },
           {
             "name": "domain-name",
-            "data": "mydomain.example"
+            "data": "flightsim.lan"
           }
         ]
       }
     ]
   }
 }
+
