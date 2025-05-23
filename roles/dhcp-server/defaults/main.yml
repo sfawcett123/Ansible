@@ -6,7 +6,7 @@ kea_ctrl_agent_svc: 'kea-ctrl-agent.service'
 kea_svc_restart: true
 
 kea_dhcp4_enable: true
-kea_ddns_enable: false
+kea_ddns_enable: true
 kea_ctrl_agent_enable: false
 
 kea_config_path: "/etc/kea"
@@ -29,37 +29,6 @@ kea_apt_keyring_path: "/etc/apt/trusted.gpg.d/isc-kea-2-2-archive-keyring.asc"
 # All of these are from examples in the Kea documentation, just translated from
 # JSON to YAML. If you hate YAML, you can use JSON instead as it's considered a
 # subset of YAML.
-
-kea_ddns_config:
-  DhcpDdns:
-    dns-server-timeout: 100
-    ip-address: "127.0.0.1"
-    ncr-format: "JSON"
-    ncr-protocol: "UDP"
-    port: 53001
-
-    loggers:
-      - name: "kea-dhcp-ddns"
-        severity: "DEBUG"
-        output_options:
-          - output: "/var/log/kea-dhcp-ddns.log"
-            maxsize: 1048576
-            maxver: 8
-      - name: "kea-dhcp-ddns.dhcp-to-d2"
-        severity: "DEBUG"
-        output_options:
-          - output: "/var/log/kea-dhcp-ddns.dhcp-to-d2.log"
-            maxsize: 1048576
-            maxver: 8
-      - name: "kea-dhcp-ddns.d2-to-dns"
-        severity: "DEBUG"
-        output_options:
-          - output: "/var/log/kea-dhcp-ddns.d2-to-dns.log"
-            maxsize: 1048576
-            maxver: 8
-    forward-ddns: {}
-    reverse-ddns: {}
-    tsig-keys: {}
 
 kea_ctrl_agent_config:
   Control-agent:

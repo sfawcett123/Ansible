@@ -1,3 +1,14 @@
-{% if kea_ddns_config %}
-{{ kea_ddns_config | to_nice_json }}
-{% endif %}
+"DhcpDdns": {
+    "ip-address": "127.0.0.1",
+    "port": 53001,
+    "dns-server-timeout": 100,
+    "ncr-protocol": "UDP",
+    "ncr-format": "JSON",
+    "tsig-keys": [ ],
+    "forward-ddns": {
+        "ddns-domains": [ ]
+    },
+    "reverse-ddns": {
+        "ddns-domains": [ ]
+    }
+}
