@@ -6,19 +6,16 @@
   loop: "{{ proxy_packages }}"
   tags: setup
 
-- name: Enable/disable DHCP4 service
+- name: Enable/disable Proxy service
   ansible.builtin.service:
     name: "{{ proxy_svc }}"
     enabled: "{{ proxy_enable }}"
   tags: setup
 
-- name: Install dhcp4 configuration
+- name: Install Proxy configuration
   ansible.builtin.template:
     src: "squid.conf.j2"
     dest: "{{ proxy_config_path }}/squid.conf"
-    mode: "0640"
-    owner: "{{ squid_user }}"
-    group: "{{ squid_group }}"
   when: proxy_enable
   notify:
     - 'proxy reload'
