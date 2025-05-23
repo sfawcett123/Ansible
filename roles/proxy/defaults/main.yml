@@ -1,0 +1,8 @@
+---
+
+proxy_enable: true
+proxy_svc: squid
+proxy_packages: 
+      - "squid"
+proxy_config_path: "/etc/squid/"
+

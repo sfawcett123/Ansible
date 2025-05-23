@@ -1,5 +1,5 @@
 
-auto eth0
+auto {{manager.interface}}
 
-iface eth0 inet static
-   address {{ip}}
+iface {{manager.interface}} inet static
+   address {{manager.ip}}

@@ -4,10 +4,6 @@
   become: True
 
   pre_tasks:
-     - name: Using IP address
-       ansible.builtin.debug:
-         msg: System {{ subnet.ip }}
-
      - name: Distribution
        debug: msg="{{ ansible_distribution }}"
 
@@ -21,3 +17,4 @@
     - common
     - dhcp-server
     - ntp
+    - proxy

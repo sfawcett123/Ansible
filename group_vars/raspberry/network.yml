@@ -1,15 +1,16 @@
-ip: 192.168.10.1
+manager:
+   ip: 192.168.10.1
+   interface: eth0
 
 configure_apparmor: true
 
-dhcp_interfaces: eth0
+domain: "flightsim.lan"
 
-default_lease_time: 86400
-max_lease_time: 86400
+proxy:
+  port: 3128
 
 subnet:
-  ip: 192.168.10.0
-  mask: 255.255.255.0
+  cidr: 192.168.10.0/24
   range:
     from: 192.168.10.100
     to: 192.168.10.200
