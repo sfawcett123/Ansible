@@ -1,2 +1,2 @@
-acl localnet src 192.168.1.0/24
+acl localnet src {{subnet.cidr}}
 http_access allow localnet

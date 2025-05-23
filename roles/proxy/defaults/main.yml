@@ -5,6 +5,4 @@ proxy_svc: squid
 proxy_packages: 
       - "squid"
 proxy_config_path: "/etc/squid/"
-squid_user: squid
-squid_group: root
 
