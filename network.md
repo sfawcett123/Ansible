@@ -7,11 +7,10 @@ Since the manager will have a static IP address that will need to be configured 
 
 Network Mask __255.255.255.0__
 
-|IP|Hardware|Purpose|
-|--|--------|-------|
-|192.168.10.1 | Raspberry pi| DHCP|
-|192.168.10.2 | Mac Book | System Admin |
+|IP|Machine Name|
+|--|--------|
+|192.168.10.1 | Manager| 
 
 ## DHCP Range
 
-192.168.10.100 -> 192.168.10.255
+192.168.10.100 -> 192.168.10.200
