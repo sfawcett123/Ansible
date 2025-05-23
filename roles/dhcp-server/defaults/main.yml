@@ -1,2 +1,61 @@
 ---
-configure_apparmor: false
+kea_dhcp4_svc: 'kea-dhcp4-server.service'
+kea_ddns_svc: 'kea-dhcp-ddns-server.service'
+kea_ctrl_agent_svc: 'kea-ctrl-agent.service'
+
+kea_svc_restart: true
+
+kea_dhcp4_enable: true
+kea_ddns_enable: true
+kea_ctrl_agent_enable: false
+
+kea_config_path: "/etc/kea"
+
+kea_user: "_kea"
+kea_group: "_kea"
+
+kea_packages:
+  - kea-admin
+  - kea-ctrl-agent
+  - kea-dhcp-ddns-server
+  - kea-dhcp4-server
+  - kea-doc
+
+kea_apt_repository: "deb https://dl.cloudsmith.io/public/isc/kea-2-2/deb/debian bookworm main"
+kea_apt_src_repository: "deb-src https://dl.cloudsmith.io/public/isc/kea-2-2/deb/debian bookworm main"
+kea_apt_keyring_url: "https://dl.cloudsmith.io/public/isc/kea-2-2/gpg.A8CB727C62565FF8.key"
+kea_apt_keyring_path: "/etc/apt/trusted.gpg.d/isc-kea-2-2-archive-keyring.asc"
+
+# All of these are from examples in the Kea documentation, just translated from
+# JSON to YAML. If you hate YAML, you can use JSON instead as it's considered a
+# subset of YAML.
+
+kea_ctrl_agent_config:
+  Control-agent:
+    http-host: "10.20.30.40"
+    http-port: 8000
+    trust_anchor: "/path/to/the/ca-cert.pem"
+    cert-file: "/path/to/the/agent-cert.pem"
+    key-file: "/path/to/the/agent-key.pem"
+    cert-required: true
+    authentication:
+      type: "basic"
+      realm: kea-control-agent
+      clients:
+        - user: "admin"
+          password: "1234"
+    control-sockets:
+      dhcp4:
+        comment: "main server"
+        socket-type: "unix"
+        socket-name: "/path/to/the/unix/socket-v4"
+      d2:
+        socket-type: "unix"
+        socket-name: "/path/to/the/unix/socket-d2"
+    hooks-libraries:
+      - library: "/opt/local/control-agent-commands.so"
+        parameters:
+          param1: "foo"
+    loggers:
+      - name: "kea-ctrl-agent"
+        severity: "INFO"

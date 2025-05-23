@@ -1,0 +1,44 @@
+{
+  "Dhcp4": {
+    "interfaces-config": {
+      "interfaces": [ "eth0" ]
+    },
+    "control-socket": {
+        "socket-type": "unix",
+        "socket-name": "/run/kea/kea4-ctrl-socket"
+    },
+    "lease-database": {
+        "type": "memfile",
+        "lfc-interval": 3600
+    },
+    "dhcp-ddns": {
+        "enable-updates": true
+    },
+    "ddns-qualifying-suffix": "flightsim.lan",
+    "ddns-override-client-update": true,
+    "valid-lifetime": 600,
+    "max-valid-lifetime": 7200,
+    "subnet4": [
+      {
+        "id": 1,
+        "subnet": "192.168.10.0/24",
+        "pools": [
+          {
+            "pool": "192.168.10.100 - 192.168.10.200"
+          }
+        ],
+        "option-data": [
+          {
+            "name": "domain-name-servers",
+            "data": "192.168.10.1"
+          },
+          {
+            "name": "domain-name",
+            "data": "flightsim.lan"
+          }
+        ]
+      }
+    ]
+  }
+}
+

@@ -9,9 +9,8 @@ Network Mask __255.255.255.0__
 
 |IP|Hardware|Purpose|
 |--|--------|-------|
-|192.168.10.1 | HP2530-48G (J9775A)| Network Switch |
+|192.168.10.1 | Raspberry pi| DHCP|
 |192.168.10.2 | Mac Book | System Admin |
-|192.168.10.3 | Raspberry pi| DHCP|
 
 ## DHCP Range
 
