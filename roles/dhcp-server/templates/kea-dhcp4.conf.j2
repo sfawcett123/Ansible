@@ -14,7 +14,7 @@
     "dhcp-ddns": {
         "enable-updates": true
     },
-    "ddns-qualifying-suffix": "{{subnet.options.domain-name}}",
+    "ddns-qualifying-suffix": "{{subnet.options.domain_name}}",
     "ddns-override-client-update": true,
     "valid-lifetime": 600,
     "max-valid-lifetime": 7200,
@@ -28,9 +28,9 @@
           }
         ],
         "option-data": [
-            {% for key, value in subnet.options.iteritems() %}
+            {% for key, value in subnet.options.items() %}
             {
-            "name": "{{key}}",
+            "name": "{{key | replace( '_', '-')}}",
             "data": "{{value}}"
             },
             {% endfor %}

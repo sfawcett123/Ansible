@@ -1,6 +1,9 @@
 manager:
    ip: 192.168.10.1
    interface: eth0
+   web:
+      directory: /home/manager
+        
 
 configure_apparmor: true
 
@@ -13,7 +16,7 @@ subnet:
     from: 192.168.10.100
     to: 192.168.10.200
   options:
-     subnet-mask: 255.255.255.0
-     broadcast-address: 192.168.10.255
-     domain-name-servers: 192.168.10.1
-     domain-name: "flightsim.lan"
+     subnet_mask: 255.255.255.0
+     broadcast_address: 192.168.10.255
+     domain_name_servers: 192.168.10.1
+     domain_name: "flightsim.lan"

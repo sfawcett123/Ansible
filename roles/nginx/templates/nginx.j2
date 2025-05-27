@@ -4,7 +4,7 @@ server {
 
     location / {
         include proxy_params;
-        proxy_pass http://unix:{{fsm.home}}/fsm.sock;
+        proxy_pass http://unix:{{manager.web.directory}}/fsm.sock;
     }
 
 }
