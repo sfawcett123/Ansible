@@ -1,1 +1,0 @@
-firefox --kiosk https://{{fsm.web.home}}

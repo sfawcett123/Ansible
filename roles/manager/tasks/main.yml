@@ -1,23 +1,8 @@
 ---
-    - name: Create group
-      become: true
-      group:
-        name: "{{ fsm.user.group }}"
-        state: present
-
-    - name: Create User
-      become: true
-      user:
-        name: "{{ fsm.user.name }}"
-        state: present
-        password: "{{ fsm.default_user_password | password_hash('sha512','A512') }}"
-        shell: "{{fsm.user.shell}}"
-        group: "{{ fsm.user.group }}"
-
     - name: Create FSM Configuration Directory
       become: true
       ansible.builtin.file:
-        path: "{{fsm.config}}"
+        path: "{{manager.web.directory}}"
         state: directory
         mode: 0775
 
@@ -25,29 +10,16 @@
       become: true
       template:
         src: config.yaml.j2
-        dest: "{{fsm.config}}/config.yaml"
-        owner: "{{ fsm.user.name }}"
-        group: "{{ fsm.user.group }}"
+        dest: "{{manager.web.directory}}/config.yaml"
         mode: 644
       notify:
           - Restart fsm
-
-    - name: Create FSM directory
-      become: true
-      ansible.builtin.file:
-        path: "{{fsm.home}}"
-        state: directory
-        owner: "{{ fsm.user.name }}"
-        group: "{{ fsm.user.group }}"
-        mode: 0775
 
     - name: Upload WSGI
       become: true
       template:
         src: wsgi.py.j2
-        dest: "{{fsm.home}}/wsgi.py"
-        owner: "{{ fsm.user.name }}"
-        group: "{{ fsm.user.group }}"
+        dest: "{{manager.web.directory}}/wsgi.py"
         mode: 644
 
     - name: Install Server
@@ -55,31 +27,31 @@
       ansible.builtin.pip:
         name: gunicorn
         state: latest
-        virtualenv: "{{fsm.home}}/{{fsm.venv}}"
-      notify:
-          - Restart fsm
+        virtualenv: "{{manager.web.directory}}/manager.venv"
+#      notify:
+#         - Restart fsm
 
-    - name: Install Flight Simulator Manager
-      become: true
-      ansible.builtin.pip:
-        name: "{{fsm.package.name}}"
-        state: latest
-        extra_args: "{{fsm.package.extra_args}}"
-        virtualenv: "{{fsm.home}}/{{fsm.venv}}"
-      notify:
-          - Restart fsm
+#   - name: Install Flight Simulator Manager
+#     become: true
+#     ansible.builtin.pip:
+#       name: "{{manager.web.package.name}}"
+#       state: latest
+#       extra_args: "{{manager.web.package.extra_args}}"
+#       virtualenv: "{{manager.web.directory}}/manager.venv"
+#     notify:
+#         - Restart fsm
 
-    - name: Create Flight Simulator Service
-      become: true
-      template:
-        src: fsm.service.j2
-        dest: /lib/systemd/system/fsm.service
-        mode: 644
-      notify:
-          - Restart fsm
+#   - name: Create Flight Simulator Service
+#     become: true
+#     template:
+#       src: fsm.service.j2
+#       dest: /lib/systemd/system/fsm.service
+#       mode: 644
+#     notify:
+#         - Restart fsm
 
-    - name: Start FSM
-      service:
-        name: "{{fsm.service.name}}"
-        state: started
-        enabled: yes
+#   - name: Start FSM
+#     service:
+#       name: "{{manager.web.service.name}}"
+#       state: started
+#       enabled: yes

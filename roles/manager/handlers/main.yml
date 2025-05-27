@@ -1,7 +1,7 @@
 ---
 
-  - name: Restart fsm
-    become: true
-    ansible.builtin.service:
-       name: "{{fsm.service.name}}"
-       state: restarted
+# - name: Restart fsm
+#   become: true
+#   ansible.builtin.service:
+#      name: "{{manager.service.name}}"
+#      state: restarted
