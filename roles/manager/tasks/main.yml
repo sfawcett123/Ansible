@@ -28,6 +28,33 @@
         name: gunicorn
         state: latest
         virtualenv: "{{manager.web.directory}}/manager.venv"
+
+    - name: Find latest Version
+      ansible.builtin.uri:
+         url: "{{manager.web.package}}"
+         return_content: true
+         body_format: json
+      register: latest 
+      
+    - name: Get the Package URL
+      set_fact:
+         download_url: "{{ latest.json.assets | json_query( qz ) | first }}"
+         package: "{{manager.web.directory}}/package.tar.gz"
+
+      vars: 
+        qz: "[?contains(name, 'manager' )].browser_download_url"
+
+    - name: Download "{{download_url}}"
+      get_url:
+        url:  "{{download_url}}"
+        dest: "{{package}}" 
+
+    - name: Install "{{package}}"
+      ansible.builtin.pip:
+        name: "{{package}}" 
+        state: latest
+        virtualenv: "{{manager.web.directory}}/manager.venv"
+
 #      notify:
 #         - Restart fsm
 

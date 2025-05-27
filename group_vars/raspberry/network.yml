@@ -3,6 +3,7 @@ manager:
    interface: eth0
    web:
       directory: /home/manager
+      package: https://api.github.com/repos/sfawcett123/fsm/releases/latest
         
 
 configure_apparmor: true
