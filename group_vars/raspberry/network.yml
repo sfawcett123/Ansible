@@ -4,8 +4,6 @@ manager:
 
 configure_apparmor: true
 
-domain: "flightsim.lan"
-
 proxy:
   port: 3128
 
@@ -17,3 +15,5 @@ subnet:
   options:
      subnet-mask: 255.255.255.0
      broadcast-address: 192.168.10.255
+     domain-name-servers: 192.168.10.1
+     domain-name: "flightsim.lan"
