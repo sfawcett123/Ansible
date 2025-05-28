@@ -1,14 +1,15 @@
 [Unit]
-Description={{fsm.description}}
+Description={{manager.service.description}}
 After=network.target
 
 [Service]
+PIDFile=/run/manager/pid
+User=www-data
+Group=www-data
 Restart=always
 RestartSec=30
-User=root
-Group={{fsm.user.group}}
-WorkingDirectory={{fsm.home}}
-ExecStart={{fsm.home}}/{{fsm.venv}}/bin/gunicorn --workers 3 --bind unix:fsm.sock -m 007 wsgi:app
-
-[Install]
-WantedBy=multi-user.target
+WorkingDirectory={{manager.web.directory}}
+ExecStart={{manager.web.directory}}/manager.venv/bin/gunicorn --pid /run/manager/pid --workers 3 --bind unix:/run/manager/fsm.sock -m 007 wsgi:app
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s TERM $MAINPID
+PrivateTmp=true

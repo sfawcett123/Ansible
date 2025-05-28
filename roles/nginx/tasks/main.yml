@@ -5,6 +5,12 @@
         pkg:
           - nginx
 
+    - name: Remove old configuration
+      become: true
+      ansible.builtin.file:
+         dest: "/etc/nginx/sites-enabled/default"
+         state: absent
+
     - name: Configure NGINX
       become: true
       template:
