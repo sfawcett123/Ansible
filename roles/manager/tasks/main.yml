@@ -1,4 +1,13 @@
 ---
+    - name: Create FSM Run Directory
+      become: true
+      ansible.builtin.file:
+        path: "/run/manager"
+        state: directory
+        owner: www-data
+        group: www-data
+        mode: 0775
+
     - name: Create FSM Configuration Directory
       become: true
       ansible.builtin.file:
@@ -39,46 +48,37 @@
     - name: Get the Package URL
       set_fact:
          download_url: "{{ latest.json.assets | json_query( qz ) | first }}"
-         package: "{{manager.web.directory}}/package.tar.gz"
-
       vars: 
         qz: "[?contains(name, 'manager' )].browser_download_url"
+
+    - name: Get package name
+      set_fact:
+         package: "{{ download_url | urlsplit( 'path') |  basename }}"
 
     - name: Download "{{download_url}}"
       get_url:
         url:  "{{download_url}}"
-        dest: "{{package}}" 
+        dest: "{{manager.web.directory}}/{{package}}" 
 
     - name: Install "{{package}}"
       ansible.builtin.pip:
-        name: "{{package}}" 
-        state: latest
+        name: "{{manager.web.directory}}/{{package}}" 
         virtualenv: "{{manager.web.directory}}/manager.venv"
+      notify:
+        - Restart fsm
 
-#      notify:
-#         - Restart fsm
+    - name: Create Flight Simulator Service
+      become: true
+      template:
+        src: fsm.service.j2
+        dest: "/lib/systemd/system/{{manager.service.name}}.service"
+        mode: 644
+      notify:
+         - Restart fsm
 
-#   - name: Install Flight Simulator Manager
-#     become: true
-#     ansible.builtin.pip:
-#       name: "{{manager.web.package.name}}"
-#       state: latest
-#       extra_args: "{{manager.web.package.extra_args}}"
-#       virtualenv: "{{manager.web.directory}}/manager.venv"
-#     notify:
-#         - Restart fsm
+    - name: Start FSM
+      service:
+        name: "{{manager.service.name}}"
+        state: started
+        enabled: yes
 
-#   - name: Create Flight Simulator Service
-#     become: true
-#     template:
-#       src: fsm.service.j2
-#       dest: /lib/systemd/system/fsm.service
-#       mode: 644
-#     notify:
-#         - Restart fsm
-
-#   - name: Start FSM
-#     service:
-#       name: "{{manager.web.service.name}}"
-#       state: started
-#       enabled: yes
