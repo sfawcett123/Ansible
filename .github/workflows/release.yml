@@ -1,0 +1,17 @@
+---
+
+on:
+  release:
+    types: [published]
+
+jobs:
+   document:
+     runs-on: ubuntu-latest
+     steps:
+       - name: Repository Dispatch
+         uses: myrotvorets/trigger-repository-dispatch-action@1.0.0
+         with:
+            token: ${{ secrets.REPOSITORY_ACCESS_TOKEN }}
+            repo: sfawcett123/sfawcett123.github.io
+            type: document
+            payload: '{ "ref": "${{ github.ref }}", "sha": "${{ github.sha }}" }'
