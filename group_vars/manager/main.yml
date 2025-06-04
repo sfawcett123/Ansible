@@ -1,0 +1,9 @@
+manager:
+   ip: 192.168.10.1
+   interface: eth0
+   service:
+      description: Flight Simulator Network Manager
+      name: fsm
+   web:
+      directory: /home/manager
+      package: https://api.github.com/repos/sfawcett123/fsm/releases/latest
