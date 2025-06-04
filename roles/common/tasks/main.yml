@@ -5,6 +5,14 @@
       ansible.builtin.hostname:
         name: "{{ hostname }}"
 
+    - name: Upgrade the OS (apt-get dist-upgrade)
+      ansible.builtin.apt:
+        upgrade: dist
+
+    - name: Run the equivalent of "apt-get update" as a separate step
+      ansible.builtin.apt:
+        update_cache: yes
+
     - name: install Packages
       become: true
       ansible.builtin.apt:

@@ -34,6 +34,7 @@ ansible -i hosts.yml -m ping all
 ## Run
 
 ```
+ansible-galaxy install -r requirements.yml --force
 ansible-playbook -i hosts.yml manager.yml
 ```
 
