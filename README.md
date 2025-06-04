@@ -7,13 +7,13 @@ On a Mac install to enable windows SSH
 brew install hudochenkov/sshpass/sshpass
 ```
 ### Network Settings
-Read [networking](./network.md) for details on network settings.
+Read the [network](https://sfawcett123.github.io/design/network) documentation, for details of the network settings.
 
 ## Keys
 
 ```
 ssh-keygen -f ~/.ssh/ansible -t ed25519
-ssh-copy-id -i ~/.ssh/ansible.pub pi@192.168.10.3
+ssh-copy-id -i ~/.ssh/ansible.pub pi@manager.local
 ```
 
 on windows
@@ -23,26 +23,18 @@ scp id_rsa.pub steve@game:/ProgramData/ssh/administrators_authorized_keys
 ```
 
 ## Inventory
-Kept in /etc/ansible/hosts file
+Kept in local [hosts](./hosts.yml) file
 
-```
-manager:
-  hosts:
-    192.168.10.3:
-  vars:
-     ansible_user: pi
-     ansible_ssh_private_key_file: ~/.ssh/ansible
-```
 ## Test
 
 ```
-ansible all -m ping
+ansible -i hosts.yml -m ping all
 ```
 
 ## Run
 
 ```
-ansible-playbook manager.yml
+ansible-playbook -i hosts.yml manager.yml
 ```
 
 
