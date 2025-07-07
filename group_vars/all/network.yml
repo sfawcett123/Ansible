@@ -1,4 +1,6 @@
 configure_apparmor: true
+main:
+    mac: D8-BB-C1-9E-C8-0C
 
 proxy:
   port: 3128
