@@ -15,4 +15,5 @@
 
   roles:
       - common
+      - snmp
       - redis
