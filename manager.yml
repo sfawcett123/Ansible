@@ -15,6 +15,7 @@
 
   roles:
     - common
+    - snmp
     - dhcp-server
     - ntp
     - proxy

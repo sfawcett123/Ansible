@@ -1,0 +1,29 @@
+---
+
+  - name: Install SNMP Packages
+    package:
+      name:
+        - snmp
+        - snmpd
+      state: present
+      lock_timeout: 180
+    become: true
+    notify:
+      "Start SNMP Service"
+
+  - name: Configure SNMP v2c Community
+    lineinfile:
+      path: /etc/snmp/snmpd.conf
+      regexp: 'com2sec notConfigUser  default       public'
+      line: 'com2sec notConfigUser  default       <COMMUNITY>'
+      backrefs: true
+    become: true
+    notify:
+      "Start SNMP Service"
+
+  - name: Start SNMP Service
+    service:
+      name: snmpd
+      state: started
+      enabled: yes
+    become: true
